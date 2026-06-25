@@ -18,6 +18,7 @@ public static class CoreConfigHandler
             result = node.CoreType switch
             {
                 ECoreType.mihomo => await new CoreConfigClashService(config).GenerateClientCustomConfig(node, fileName),
+                ECoreType.SSRR => GenerateSsrrConfig(node),
                 _ => await GenerateClientCustomConfig(node, fileName)
             };
         }
@@ -88,6 +89,75 @@ public static class CoreConfigHandler
             ret.Msg = ResUI.FailedGenDefaultConfiguration;
             return ret;
         }
+    }
+
+    private static RetResult GenerateSsrrConfig(ProfileItem node)
+    {
+        var ret = new RetResult();
+        var protocolExtra = node.GetProtocolExtra();
+
+        if (node.Address.IsNullOrEmpty()
+            || node.Port is <= 0 or > 65535
+            || node.Password.IsNullOrEmpty()
+            || !(node.PreSocksPort is > 0 and <= 65535)
+            || protocolExtra.SsrrProtocol.IsNullOrEmpty()
+            || protocolExtra.SsrrObfs.IsNullOrEmpty())
+        {
+            ret.Msg = ResUI.CheckServerSettings;
+            return ret;
+        }
+
+        var localPort = node.PreSocksPort.Value;
+        var toml = new StringBuilder()
+            .AppendLine("[logging]")
+            .AppendLine("level = \"info\"")
+            .AppendLine()
+            .AppendLine("[local]")
+            .Append("listen = ").AppendTomlString($"{Global.Loopback}:{localPort}").AppendLine()
+            .AppendLine("read_buffer_size = 65536")
+            .AppendLine("tcp_warm_pool_size = 1")
+            .AppendLine()
+            .AppendLine("[server]")
+            .Append("remote = ").AppendTomlString($"{node.Address}:{node.Port}").AppendLine()
+            .AppendLine("cipher = \"none\"")
+            .AppendLine()
+            .AppendLine("[obfs]")
+            .Append("method = ").AppendTomlString(protocolExtra.SsrrObfs).AppendLine()
+            .Append("obfs_param = ").AppendTomlString(protocolExtra.SsrrObfsParam ?? string.Empty).AppendLine()
+            .Append("host = ").AppendTomlString(protocolExtra.SsrrObfsParam ?? string.Empty).AppendLine()
+            .AppendLine()
+            .AppendLine("[protocol]")
+            .Append("method = ").AppendTomlString(protocolExtra.SsrrProtocol).AppendLine()
+            .Append("password = ").AppendTomlString(node.Password).AppendLine()
+            .Append("protocol_param = ").AppendTomlString(protocolExtra.SsrrProtocolParam ?? string.Empty).AppendLine()
+            .AppendLine("tcp_mss = 0")
+            .AppendLine("overhead = 4")
+            .AppendLine("udp_packet_size = 1452")
+            .AppendLine()
+            .AppendLine("[dns]")
+            .AppendLine("remote = \"8.8.8.8:53\"")
+            .AppendLine("china = \"223.5.5.5:53\"")
+            .AppendLine("custom_acl_file = \"\"")
+            .ToString();
+
+        ret.Msg = string.Format(ResUI.SuccessfulConfiguration, "");
+        ret.Success = true;
+        ret.Data = toml;
+        return ret;
+    }
+
+    private static StringBuilder AppendTomlString(this StringBuilder builder, string value)
+    {
+        builder.Append('"');
+        foreach (var ch in value)
+        {
+            if (ch is '\\' or '"')
+            {
+                builder.Append('\\');
+            }
+            builder.Append(ch);
+        }
+        return builder.Append('"');
     }
 
     public static async Task<RetResult> GenerateClientSpeedtestConfig(Config config, string fileName, List<ServerTestItem> selecteds, ECoreType coreType)

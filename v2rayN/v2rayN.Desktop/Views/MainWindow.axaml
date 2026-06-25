@@ -42,6 +42,7 @@
                         <MenuItem x:Name="menuAddVmessServer" Header="{x:Static resx:ResUI.menuAddVmessServer}" />
                         <MenuItem x:Name="menuAddVlessServer" Header="{x:Static resx:ResUI.menuAddVlessServer}" />
                         <MenuItem x:Name="menuAddShadowsocksServer" Header="{x:Static resx:ResUI.menuAddShadowsocksServer}" />
+                        <MenuItem x:Name="menuAddSsrrServer" Header="SSRR" />
                         <MenuItem x:Name="menuAddTrojanServer" Header="{x:Static resx:ResUI.menuAddTrojanServer}" />
                         <MenuItem x:Name="menuAddHysteria2Server" Header="{x:Static resx:ResUI.menuAddHysteria2Server}" />
                         <MenuItem x:Name="menuAddWireguardServer" Header="{x:Static resx:ResUI.menuAddWireguardServer}" />

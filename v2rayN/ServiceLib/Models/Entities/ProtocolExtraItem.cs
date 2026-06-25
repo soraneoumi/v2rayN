@@ -18,6 +18,12 @@ public record ProtocolExtraItem
     //public string? PluginArgs { get; init; }
     public string? SsMethod { get; init; }
 
+    // shadowsocksrr
+    public string? SsrrProtocol { get; init; }
+    public string? SsrrProtocolParam { get; init; }
+    public string? SsrrObfs { get; init; }
+    public string? SsrrObfsParam { get; init; }
+
     // wireguard
     public string? WgPublicKey { get; init; }
     public string? WgPresharedKey { get; init; }

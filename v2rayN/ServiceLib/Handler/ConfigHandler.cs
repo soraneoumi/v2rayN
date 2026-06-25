@@ -581,9 +581,13 @@ public static class ConfigHandler
         {
             item.Remarks = profileItem.Remarks;
             item.Address = profileItem.Address;
+            item.Port = profileItem.Port;
+            item.Password = profileItem.Password;
             item.CoreType = profileItem.CoreType;
             item.DisplayLog = profileItem.DisplayLog;
             item.PreSocksPort = profileItem.PreSocksPort;
+            item.ProtoExtra = profileItem.ProtoExtra;
+            item.TransportExtra = profileItem.TransportExtra;
         }
 
         if (await SQLiteHelper.Instance.UpdateAsync(item) > 0)
@@ -596,6 +600,22 @@ public static class ConfigHandler
         }
 
         //ToJsonFile(config);
+    }
+
+    public static async Task<int> SaveCustomServer(Config config, ProfileItem profileItem)
+    {
+        profileItem.ConfigType = EConfigType.Custom;
+        profileItem.Address = profileItem.Address.TrimEx();
+        profileItem.Password = profileItem.Password.TrimEx();
+        profileItem.SetProtocolExtra(profileItem.GetProtocolExtra());
+
+        if (await AppManager.Instance.GetProfileItem(profileItem.IndexId) is null)
+        {
+            await AddServerCommon(config, profileItem, true);
+            return 0;
+        }
+
+        return await EditCustomServer(config, profileItem);
     }
 
     /// <summary>

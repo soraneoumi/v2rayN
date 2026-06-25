@@ -288,6 +288,14 @@ public sealed class CoreInfoManager
                         { "MIERU_CONFIG_JSON_FILE", "{0}" },
                     },
                 },
+
+                new CoreInfo
+                {
+                    CoreType = ECoreType.SSRR,
+                    CoreExes = ["ssrr-local"],
+                    Arguments = "--config {0}",
+                    Url = string.Empty,
+                },
         ];
     }
 

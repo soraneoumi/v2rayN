@@ -67,6 +67,7 @@ public partial class MainWindow
             this.BindCommand(ViewModel, vm => vm.AddVmessServerCmd, v => v.menuAddVmessServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddVlessServerCmd, v => v.menuAddVlessServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddShadowsocksServerCmd, v => v.menuAddShadowsocksServer).DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.AddSsrrServerCmd, v => v.menuAddSsrrServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddSocksServerCmd, v => v.menuAddSocksServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddHttpServerCmd, v => v.menuAddHttpServer).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.AddTrojanServerCmd, v => v.menuAddTrojanServer).DisposeWith(disposables);
@@ -460,8 +461,8 @@ public partial class MainWindow
     {
         var coreInfo = CoreInfoManager.Instance.GetCoreInfo();
         foreach (var it in coreInfo
-            .Where(t => t.CoreType is not ECoreType.v2fly
-                        and not ECoreType.hysteria))
+            .Where(t => (t.CoreType is not ECoreType.v2fly and not ECoreType.hysteria)
+                        && t.Url.IsNotEmpty()))
         {
             var item = new MenuItem()
             {

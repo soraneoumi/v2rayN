@@ -8,7 +8,7 @@
     xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
     Title="{x:Static resx:ResUI.menuAddCustomServer}"
     Width="700"
-    Height="500"
+    Height="620"
     x:DataType="vms:AddServer2ViewModel"
     ShowInTaskbar="False"
     WindowStartupLocation="CenterScreen"
@@ -32,7 +32,8 @@
                 IsCancel="True" />
         </StackPanel>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+            <Grid RowDefinitions="Auto,Auto">
+                <Grid Grid.Row="0" ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 
                 <TextBlock
                     Grid.Row="0"
@@ -57,6 +58,7 @@
                     VerticalAlignment="Center" />
 
                 <TextBlock
+                    x:Name="txtAddressTitle"
                     Grid.Row="2"
                     Grid.Column="0"
                     Margin="{StaticResource Margin4}"
@@ -72,6 +74,7 @@
                     VerticalAlignment="Center"
                     IsReadOnly="True" />
                 <StackPanel
+                    x:Name="panFileButtons"
                     Grid.Row="2"
                     Grid.Column="2"
                     VerticalAlignment="Center"
@@ -87,6 +90,7 @@
                 </StackPanel>
 
                 <TextBlock
+                    x:Name="txtCoreTypeTitle"
                     Grid.Row="3"
                     Grid.Column="0"
                     Margin="{StaticResource Margin4}"
@@ -136,6 +140,7 @@
                     Margin="{StaticResource Margin4}"
                     HorizontalAlignment="Left" />
                 <StackPanel
+                    x:Name="panCustomTips"
                     Grid.Row="6"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
@@ -151,6 +156,115 @@
                         VerticalAlignment="Center"
                         Text="{x:Static resx:ResUI.CustomServerTips}"
                         TextWrapping="Wrap" />
+                </StackPanel>
+                </Grid>
+                <StackPanel x:Name="panSsrrSettings" Grid.Row="1" IsVisible="False">
+                    <Separator Margin="{StaticResource Margin4}" />
+                    <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            Text="SSRR" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="{x:Static resx:ResUI.TbPort}" />
+                        <TextBox
+                            x:Name="txtSsrrPort"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="200"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="{x:Static resx:ResUI.TbId3}" />
+                        <TextBox
+                            x:Name="txtSsrrPassword"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="400"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="Method" />
+                        <ComboBox
+                            x:Name="cmbSsrrMethod"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Width="260"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="Protocol" />
+                        <ComboBox
+                            x:Name="cmbSsrrProtocol"
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Width="260"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="Protocol param" />
+                        <TextBox
+                            x:Name="txtSsrrProtocolParam"
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Width="400"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="Obfs" />
+                        <ComboBox
+                            x:Name="cmbSsrrObfs"
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Width="260"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Text="Obfs param" />
+                        <TextBox
+                            x:Name="txtSsrrObfsParam"
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Width="400"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left" />
+                    </Grid>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

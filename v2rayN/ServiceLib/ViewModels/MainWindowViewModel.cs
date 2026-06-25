@@ -19,6 +19,7 @@ public class MainWindowViewModel : MyReactiveObject
     public ReactiveCommand<Unit, Unit> AddWireguardServerCmd { get; }
     public ReactiveCommand<Unit, Unit> AddAnytlsServerCmd { get; }
     public ReactiveCommand<Unit, Unit> AddNaiveServerCmd { get; }
+    public ReactiveCommand<Unit, Unit> AddSsrrServerCmd { get; }
     public ReactiveCommand<Unit, Unit> AddCustomServerCmd { get; }
     public ReactiveCommand<Unit, Unit> AddPolicyGroupServerCmd { get; }
     public ReactiveCommand<Unit, Unit> AddProxyChainServerCmd { get; }
@@ -123,6 +124,10 @@ public class MainWindowViewModel : MyReactiveObject
         AddNaiveServerCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await AddServerAsync(EConfigType.Naive);
+        });
+        AddSsrrServerCmd = ReactiveCommand.CreateFromTask(async () =>
+        {
+            await AddSsrrServerAsync();
         });
         AddCustomServerCmd = ReactiveCommand.CreateFromTask(async () =>
         {
@@ -380,6 +385,27 @@ public class MainWindowViewModel : MyReactiveObject
             ret = await _updateView?.Invoke(EViewAction.AddServerWindow, item);
         }
         if (ret == true)
+        {
+            await RefreshServers();
+            if (item.IndexId == _config.IndexId)
+            {
+                await Reload();
+            }
+        }
+    }
+
+    public async Task AddSsrrServerAsync()
+    {
+        ProfileItem item = new()
+        {
+            Subid = _config.SubIndexId,
+            ConfigType = EConfigType.Custom,
+            CoreType = ECoreType.SSRR,
+            PreSocksPort = Utils.GetFreePort(AppManager.Instance.GetLocalPort(EInboundProtocol.speedtest) + 100),
+            IsSub = false,
+        };
+
+        if (await _updateView?.Invoke(EViewAction.AddServer2Window, item) == true)
         {
             await RefreshServers();
             if (item.IndexId == _config.IndexId)

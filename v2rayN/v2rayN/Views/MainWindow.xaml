@@ -96,6 +96,10 @@
                                     Height="{StaticResource MenuItemHeight}"
                                     Header="{x:Static resx:ResUI.menuAddShadowsocksServer}" />
                                 <MenuItem
+                                    x:Name="menuAddSsrrServer"
+                                    Height="{StaticResource MenuItemHeight}"
+                                    Header="SSRR" />
+                                <MenuItem
                                     x:Name="menuAddTrojanServer"
                                     Height="{StaticResource MenuItemHeight}"
                                     Header="{x:Static resx:ResUI.menuAddTrojanServer}" />

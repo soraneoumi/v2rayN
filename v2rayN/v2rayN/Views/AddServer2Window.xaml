@@ -11,7 +11,7 @@
     xmlns:vms="clr-namespace:ServiceLib.ViewModels;assembly=ServiceLib"
     Title="{x:Static resx:ResUI.menuAddCustomServer}"
     Width="700"
-    Height="500"
+    Height="620"
     x:TypeArguments="vms:AddServer2ViewModel"
     ShowInTaskbar="False"
     Style="{StaticResource WindowGlobal}"
@@ -89,6 +89,7 @@
                         Style="{StaticResource MyOutlinedTextBox}" />
 
                     <TextBlock
+                        x:Name="txtAddressTitle"
                         Grid.Row="2"
                         Grid.Column="0"
                         Margin="{StaticResource Margin4}"
@@ -106,6 +107,7 @@
                         IsReadOnly="True"
                         Style="{StaticResource MyOutlinedTextBox}" />
                     <StackPanel
+                        x:Name="panFileButtons"
                         Grid.Row="2"
                         Grid.Column="2"
                         VerticalAlignment="Center"
@@ -123,6 +125,7 @@
                     </StackPanel>
 
                     <TextBlock
+                        x:Name="txtCoreTypeTitle"
                         Grid.Row="3"
                         Grid.Column="0"
                         Margin="{StaticResource Margin4}"
@@ -176,6 +179,7 @@
                         AcceptsReturn="True"
                         Style="{StaticResource MyOutlinedTextBox}" />
                     <StackPanel
+                        x:Name="panCustomTips"
                         Grid.Row="6"
                         Grid.Column="1"
                         Grid.ColumnSpan="2">
@@ -194,6 +198,147 @@
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </Grid>
+                <StackPanel
+                    x:Name="panSsrrSettings"
+                    Grid.Row="1"
+                    Visibility="Collapsed">
+                    <Separator Margin="{StaticResource Margin4}" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            Style="{StaticResource ModuleTitle}"
+                            Text="SSRR" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="{x:Static resx:ResUI.TbPort}" />
+                        <TextBox
+                            x:Name="txtSsrrPort"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="200"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextBox}" />
+
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="{x:Static resx:ResUI.TbId3}" />
+                        <TextBox
+                            x:Name="txtSsrrPassword"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Width="400"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextBox}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Method" />
+                        <ComboBox
+                            x:Name="cmbSsrrMethod"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Width="260"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextComboBox}" />
+
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Protocol" />
+                        <ComboBox
+                            x:Name="cmbSsrrProtocol"
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Width="260"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextComboBox}" />
+
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Protocol param" />
+                        <TextBox
+                            x:Name="txtSsrrProtocolParam"
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Width="400"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextBox}" />
+
+                        <TextBlock
+                            Grid.Row="6"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Obfs" />
+                        <ComboBox
+                            x:Name="cmbSsrrObfs"
+                            Grid.Row="6"
+                            Grid.Column="1"
+                            Width="260"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextComboBox}" />
+
+                        <TextBlock
+                            Grid.Row="7"
+                            Grid.Column="0"
+                            Margin="{StaticResource Margin4}"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource ToolbarTextBlock}"
+                            Text="Obfs param" />
+                        <TextBox
+                            x:Name="txtSsrrObfsParam"
+                            Grid.Row="7"
+                            Grid.Column="1"
+                            Width="400"
+                            Margin="{StaticResource Margin4}"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource MyOutlinedTextBox}" />
+                    </Grid>
+                </StackPanel>
             </Grid>
         </ScrollViewer>
     </DockPanel>
